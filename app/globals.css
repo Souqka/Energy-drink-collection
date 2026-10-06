@@ -466,7 +466,7 @@
   flex: 1 1 auto;
   align-items: flex-end;
   justify-content: center;
-  margin-bottom: -15px;
+  margin-bottom: -2px;
 }
 
 .can-sizer {
@@ -717,7 +717,7 @@
 }
 
 .empty-bay .empty-can {
-  margin-bottom: -8px;
+  margin-bottom: 2px;
 }
 
 .empty-can {
