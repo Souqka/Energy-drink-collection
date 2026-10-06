@@ -1,3 +1,4 @@
+import { pedestalStone } from "@/lib/cabinet"
 import type { EnergyDrink } from "@/lib/types"
 import { cn } from "cn"
 
@@ -8,7 +9,14 @@ type PedestalProps = {
 
 export function Pedestal({ drink, arriving = false }: PedestalProps) {
   return (
-    <div className={cn("pedestal", !drink && "pedestal-empty", arriving && "pedestal-arriving")}>
+    <div
+      className={cn(
+        "pedestal",
+        drink && `pedestal-stone-${pedestalStone(drink.rating)}`,
+        !drink && "pedestal-empty",
+        arriving && "pedestal-arriving",
+      )}
+    >
       <div className="pedestal-top" aria-hidden="true" />
       <div className="pedestal-face">
         {drink ? (

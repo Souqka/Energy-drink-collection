@@ -264,9 +264,12 @@
   margin-block: auto;
   padding: 0 10px;
   border-radius: 12px 12px 8px 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 226, 190, 0.16), transparent 18px),
-    linear-gradient(90deg, #2a241c 0%, #14110e 12%, #14110e 88%, #2a241c 100%);
+  background-color: #2a2118;
+  background-image:
+    linear-gradient(180deg, rgba(255, 236, 214, 0.08), rgba(0, 0, 0, 0.22)),
+    url("/textures/cabinet-wood.jpg");
+  background-position: center;
+  background-size: cover;
   box-shadow:
     0 30px 70px rgba(0, 0, 0, 0.55),
     0 1px 0 rgba(255, 230, 196, 0.22) inset,
@@ -286,7 +289,12 @@
   height: 16px;
   margin: 10px 18px 8px;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, #8d7458, #3a3128 46%, #16130f);
+  background-color: #3a2c22;
+  background-image:
+    linear-gradient(180deg, rgba(255, 236, 214, 0.28), rgba(0, 0, 0, 0.35)),
+    url("/textures/cabinet-wood.jpg");
+  background-position: center 20%;
+  background-size: cover;
   box-shadow:
     0 1px 0 rgba(255, 232, 204, 0.45) inset,
     0 8px 14px rgba(0, 0, 0, 0.28);
@@ -299,7 +307,10 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: 3px;
-  background: #0c0b09;
+  background-color: #2c241c;
+  background-image: url("/textures/cabinet-wood.jpg");
+  background-position: center;
+  background-size: cover;
   box-shadow:
     inset 0 0 0 1px rgba(255, 220, 180, 0.07),
     inset 0 0 40px rgba(0, 0, 0, 0.45);
@@ -316,7 +327,8 @@
 .shelf-end {
   display: grid;
   place-items: center;
-  color: rgba(215, 176, 122, 0.42);
+  color: rgba(255, 236, 214, 0.78);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.65);
   font-size: 10px;
   letter-spacing: 0.14em;
 }
@@ -351,17 +363,21 @@
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
   padding: 7px 8px 0;
-  background:
-    linear-gradient(90deg, rgba(255, 220, 180, 0.05), transparent 10%, transparent 90%, rgba(255, 220, 180, 0.05)),
-    linear-gradient(180deg, #1c1814, #100e0c);
+  background-color: #3a2e24;
+  background-image: url("/textures/cabinet-wood.jpg");
+  background-position: center 40%;
+  background-size: cover;
 }
 
 .shelf-board {
   height: 11px;
   margin-top: 0;
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 8px),
-    linear-gradient(180deg, #a88868 0%, #6b5340 30%, #3d3126 72%, #221b16 100%);
+  background-color: #4a3828;
+  background-image:
+    linear-gradient(180deg, rgba(255, 228, 196, 0.28), rgba(0, 0, 0, 0.28)),
+    url("/textures/cabinet-wood.jpg");
+  background-position: center 70%;
+  background-size: cover;
   box-shadow:
     0 8px 12px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 232, 206, 0.48);
@@ -543,6 +559,18 @@
   transition: filter 280ms ease, opacity 280ms ease;
 }
 
+.pedestal-stone-white {
+  --pedestal-stone: url("/textures/stone-white.jpg");
+}
+
+.pedestal-stone-blue {
+  --pedestal-stone: url("/textures/stone-blue.jpg");
+}
+
+.pedestal-stone-red {
+  --pedestal-stone: url("/textures/stone-red.jpg");
+}
+
 .pedestal-top {
   height: 9px;
   flex: 0 0 9px;
@@ -566,6 +594,50 @@
   box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.35);
   padding: 2px 6px 5px;
   text-align: center;
+}
+
+.pedestal-stone-white .pedestal-top,
+.pedestal-stone-blue .pedestal-top,
+.pedestal-stone-red .pedestal-top,
+.pedestal-stone-white .pedestal-face,
+.pedestal-stone-blue .pedestal-face,
+.pedestal-stone-red .pedestal-face {
+  background-color: #241c18;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.32)),
+    var(--pedestal-stone);
+  background-position: center;
+  background-size: cover;
+}
+
+.pedestal-stone-white .pedestal-top,
+.pedestal-stone-white .pedestal-face {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(80, 70, 60, 0.08)),
+    var(--pedestal-stone);
+}
+
+.pedestal-stone-blue .pedestal-rating,
+.pedestal-stone-blue .pedestal-volume,
+.pedestal-stone-blue .pedestal-comment,
+.pedestal-stone-red .pedestal-rating,
+.pedestal-stone-red .pedestal-volume,
+.pedestal-stone-red .pedestal-comment {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.72);
+}
+
+.pedestal-stone-white .pedestal-rating,
+.pedestal-stone-white .pedestal-rating small,
+.pedestal-stone-white .pedestal-volume,
+.pedestal-stone-white .pedestal-comment {
+  color: #241c16;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pedestal-stone-white .pedestal-volume,
+.pedestal-stone-white .pedestal-comment,
+.pedestal-stone-white .pedestal-rating small {
+  color: rgba(36, 28, 22, 0.78);
 }
 
 .pedestal-rating {
@@ -681,7 +753,12 @@
   height: 18px;
   margin: 0 -10px;
   border-radius: 0 0 8px 8px;
-  background: linear-gradient(180deg, #5b4d3e, #1a1612 42%, #090807);
+  background-color: #241910;
+  background-image:
+    linear-gradient(180deg, rgba(255, 226, 190, 0.16), rgba(0, 0, 0, 0.45)),
+    url("/textures/cabinet-wood.jpg");
+  background-position: center 90%;
+  background-size: cover;
   box-shadow:
     inset 0 1px 0 rgba(255, 226, 190, 0.28),
     0 14px 24px rgba(0, 0, 0, 0.45);

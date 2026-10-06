@@ -5,12 +5,16 @@ import { AddDrinkDialog } from "@/components/collection/AddDrinkDialog"
 import { CollectionHeader } from "@/components/collection/CollectionHeader"
 import { DrinkDetailsDialog } from "@/components/collection/DrinkDetailsDialog"
 import { EnergyDrinkCabinet } from "@/components/collection/EnergyDrinkCabinet"
-import { collectionStats, createDrink, findFirstEmptySlot } from "@/lib/cabinet"
+import { collectionStats, createDrink, hasRoom, layoutByBrand } from "@/lib/cabinet"
 import { loadCollection, saveCollection } from "@/lib/collection-storage"
 import type { EnergyDrink, NewEnergyDrinkInput } from "@/lib/types"
 
 export function CollectionScreen() {
-  const [drinks, setDrinks] = useState<EnergyDrink[]>(() => loadCollection())
+  const [drinks, setDrinks] = useState<EnergyDrink[]>(() => {
+    const laidOut = layoutByBrand(loadCollection())
+    saveCollection(laidOut)
+    return laidOut
+  })
   const [addOpen, setAddOpen] = useState(false)
   const [formKey, setFormKey] = useState(0)
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -18,7 +22,7 @@ export function CollectionScreen() {
   const [leavingId, setLeavingId] = useState<string | null>(null)
 
   const stats = collectionStats(drinks)
-  const nextSlot = findFirstEmptySlot(drinks)
+  const canAdd = hasRoom(drinks)
   const selected = drinks.find((drink) => drink.id === selectedId) ?? null
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export function CollectionScreen() {
     if (!leavingId) return
     const id = leavingId
     const timeout = window.setTimeout(() => {
-      const next = drinks.filter((drink) => drink.id !== id)
+      const next = layoutByBrand(drinks.filter((drink) => drink.id !== id))
       setDrinks(next)
       saveCollection(next)
       setLeavingId((current) => (current === id ? null : current))
@@ -40,11 +44,10 @@ export function CollectionScreen() {
   }, [leavingId, drinks])
 
   function handleAdd(input: NewEnergyDrinkInput) {
-    const position = findFirstEmptySlot(drinks)
-    if (!position) return
+    if (!hasRoom(drinks)) return
 
-    const drink = createDrink(input, position)
-    const next = [...drinks, drink]
+    const drink = createDrink(input, { shelf: 1, slot: 1 })
+    const next = layoutByBrand([...drinks, drink])
     setDrinks(next)
     saveCollection(next)
     setAddOpen(false)
@@ -80,7 +83,7 @@ export function CollectionScreen() {
       <AddDrinkDialog
         key={formKey}
         open={addOpen}
-        canAdd={nextSlot !== null}
+        canAdd={canAdd}
         onOpenChange={setAddOpen}
         onAdd={handleAdd}
       />

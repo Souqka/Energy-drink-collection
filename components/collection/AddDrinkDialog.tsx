@@ -84,7 +84,7 @@ export function AddDrinkDialog({ open, canAdd, onOpenChange, onAdd }: AddDrinkDi
           <DialogTitle>Add energy drink</DialogTitle>
           <DialogDescription>
             {canAdd
-              ? "The can is placed in the first empty niche."
+              ? "It lines up with the other cans from that brand. Later brands shift forward."
               : "Every niche is occupied. Remove a can to free a place."}
           </DialogDescription>
         </DialogHeader>

@@ -5,18 +5,31 @@ export const SLOTS_PER_SHELF = 6
 export const CABINET_CAPACITY = SHELF_COUNT * SLOTS_PER_SHELF
 export const MAX_COMMENT_LENGTH = 80
 
-export function findFirstEmptySlot(drinks: EnergyDrink[]): ShelfPosition | null {
-  const occupied = new Set(drinks.map((drink) => `${drink.shelf}:${drink.slot}`))
+export function hasRoom(drinks: EnergyDrink[]) {
+  return drinks.length < CABINET_CAPACITY
+}
 
-  for (let shelf = 1; shelf <= SHELF_COUNT; shelf += 1) {
-    for (let slot = 1; slot <= SLOTS_PER_SHELF; slot += 1) {
-      if (!occupied.has(`${shelf}:${slot}`)) {
-        return { shelf, slot }
-      }
-    }
-  }
+export function pedestalStone(rating: number): "white" | "blue" | "red" {
+  if (rating >= 9) return "red"
+  if (rating >= 5) return "blue"
+  return "white"
+}
 
-  return null
+function compareDrinks(a: EnergyDrink, b: EnergyDrink) {
+  const brand = a.brand.localeCompare(b.brand, "en", { sensitivity: "base" })
+  if (brand !== 0) return brand
+  const flavor = a.flavor.localeCompare(b.flavor, "en", { sensitivity: "base" })
+  if (flavor !== 0) return flavor
+  return a.createdAt.localeCompare(b.createdAt)
+}
+
+export function layoutByBrand(drinks: EnergyDrink[]): EnergyDrink[] {
+  return [...drinks].sort(compareDrinks).map((drink, index) => {
+    const shelf = Math.floor(index / SLOTS_PER_SHELF) + 1
+    const slot = (index % SLOTS_PER_SHELF) + 1
+    if (drink.shelf === shelf && drink.slot === slot) return drink
+    return { ...drink, shelf, slot }
+  })
 }
 
 export function createDrink(input: NewEnergyDrinkInput, position: ShelfPosition): EnergyDrink {
