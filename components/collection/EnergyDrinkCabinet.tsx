@@ -28,7 +28,7 @@ export function EnergyDrinkCabinet({
 
   return (
     <div ref={rootRef} className="cabinet">
-      <div className="cabinet-cornice" aria-hidden="true" />
+      <div className="cabinet-crown" aria-hidden="true" />
       <div className="shelves">
         {Array.from({ length: SHELF_COUNT }, (_, index) => {
           const shelf = index + 1
@@ -44,6 +44,7 @@ export function EnergyDrinkCabinet({
           )
         })}
       </div>
+      <div className="cabinet-glass" aria-hidden="true" />
       <div className="cabinet-plinth" aria-hidden="true" />
     </div>
   )
