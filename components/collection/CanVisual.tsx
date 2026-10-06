@@ -113,7 +113,7 @@ export function CanVisual({ brand, flavor, volumeMl, className }: CanVisualProps
   const flavorY = brands.length > 1 ? 236 : 242
 
   return (
-    <svg viewBox="0 0 250 400" className={cn("can-visual", className)} role="img" aria-hidden="true">
+    <svg viewBox="0 26 250 356" className={cn("can-visual", className)} role="img" aria-hidden="true">
       <defs>
         <linearGradient id={`${rawId}-body`} x1="42" x2="208" y1="0" y2="0" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor={palette.bodyDeep} />
